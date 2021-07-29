@@ -1,8 +1,8 @@
-[ ] get added to server
-[ ] post added to server  
-[ ] 4 inputs on html
-[ ] submit button html and on ready
-[ ] restart button html and on ready
+[x] get added to server
+[x] post added to server  
+[x] 4 inputs on html
+[x] submit button html and on ready
+[x] restart button html and on ready
 [ ] function for total guesses
 [ ] function for random number 1-25
 [ ] if statement for guess too high/too low
