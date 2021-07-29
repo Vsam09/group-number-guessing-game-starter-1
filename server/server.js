@@ -6,6 +6,8 @@ const app = express();
 const randomNumber = require('./modules/random')
 const PORT = 5000;
 
+
+
 const guesses = [];
 
 // This must be added before GET & POST routes.
@@ -31,6 +33,29 @@ app.post('/guesses', (req, res) => {
 })
 
 
+function compareGuesses(){
+
+  for(let i = 0; i < guesses.length; i++){
+    if(randomNumber === guesses[i]){
+      console.log("You are correct");
+      return "You are correct";
+      
+  }else if (randomNumber > guesses[i]) {
+    console.log("Your number is too high");
+    return "Your number is too high";
+  }else //end of else if
+  {
+    console.log("Your number is too low");
+    return "Your number is too low";
+
+  }//end of else
+  }//end of for
+  
+}
+
+compareGuesses();
+
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)
 })
+

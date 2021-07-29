@@ -23,6 +23,7 @@ function onSubmitBtn () {
 console.log(guessesObj)
 
 numberGuesses.push(guessesObj)
+console.log(guessesObj);
 
   $.ajax({
     url: "/guesses",
@@ -58,10 +59,10 @@ function getGuesses () {
       let random = response[i]
       
       el.append(
-        `<li>${random.inputOne}</li>
-        <li>${random.inputTwo}</li>
-        <li>${random.inputThree}</li>
-        <li>${random.inputFour}</li>`
+        `<li> Sam: ${random.inputOne}</li>
+        <li>Jay: ${random.inputTwo}</li>
+        <li>Jeremy: ${random.inputThree}</li>
+        <li>Hamza: ${random.inputFour}</li>`
       );
 
     }
