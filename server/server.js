@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { get } = require('jquery');
 const app = express();
+
+const randomNumber = require('./modules/random')
 const PORT = 5000;
 
 const guesses = [];
