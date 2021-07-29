@@ -1,10 +1,15 @@
+// const { response } = require("express");
+
 $(document).ready(handleReady);
 
 function handleReady() {
   console.log("jquery is loaded!")
 
 $('#submitBtn').on("click", onSubmitBtn)
+
+getGuesses();
 }
+const numberGuesses = []
 
 function onSubmitBtn () {
   console.log("on OnSubmitBtm")
@@ -17,12 +22,15 @@ function onSubmitBtn () {
   };
 console.log(guessesObj)
 
+numberGuesses.push(guessesObj)
+
   $.ajax({
     url: "/guesses",
     method:"POST", 
     data: guessesObj
   }).then((response)=> {
     console.log('POST /guesses', response);
+   // getGuesses()
   }).catch((error) => {
     console.log('POST /guesses failed', error);
     alert("Failed to save your input! check your data, before you wreck your data");
@@ -30,6 +38,36 @@ console.log(guessesObj)
 
 }
 
+
+
+function getGuesses () {
+
+  $.ajax({
+    url: "/guesses",
+    method:"GET"
+  }).then((response) => {
+
+    console.log("Response is", response);
+
+  let el = $("#randomNumberOut");
+
+  el.empty();
+
+    for(let i = 0; i < response.length; i++) {
+
+      let random = response[i]
+      
+      el.append(
+        `<li>${random.inputOne}</li>
+        <li>${random.inputTwo}</li>
+        <li>${random.inputThree}</li>
+        <li>${random.inputFour}</li>`
+      );
+
+    }
+
+  })
+}
 
 
 
