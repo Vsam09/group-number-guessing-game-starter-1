@@ -1,7 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { get } = require('jquery');
 const app = express();
 const PORT = 5000;
+
+const guesses = [];
 
 // This must be added before GET & POST routes.
 app.use(bodyParser.urlencoded({extended:true}))
@@ -10,6 +13,20 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static('server/public'));
 
 // GET & POST Routes go here
+
+
+//route for get 
+app.get("/guesses", (req, res) => {
+console.log("Request is:", req.route.path)
+res.send(guesses) //guesses
+})
+
+app.post('/guesses', (req, res) => {
+  console.log("Post is:", req.body );
+
+  ///Would need a validation process setup here....
+  guesses.push(req.body);
+})
 
 
 app.listen(PORT, () => {
