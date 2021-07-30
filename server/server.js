@@ -23,37 +23,41 @@ app.use(express.static('server/public'));
 app.get("/guesses", (req, res) => {
 console.log("Request is:", req.route.path)
 res.send(guesses) //guesses
+compareGuesses();
 })
 
 app.post('/guesses', (req, res) => {
   console.log("Post is:", req.body );
 
+
+
+  res.sendStatus(201)
+ 
   ///Would need a validation process setup here....
   guesses.push(req.body);
+  // compareGuesses();
 })
 
 
 function compareGuesses(){
 
   for(let i = 0; i < guesses.length; i++){
-    if(randomNumber === guesses[i]){
+    if ( randomNumber === guesses[i]) {
       console.log("You are correct");
-      return "You are correct";
-      
-  }else if (randomNumber > guesses[i]) {
-    console.log("Your number is too high");
-    return "Your number is too high";
-  }else //end of else if
-  {
-    console.log("Your number is too low");
-    return "Your number is too low";
-
-  }//end of else
+      // return "You are correct";
+    }else if (randomNumber > guesses[i]) {
+      console.log("Your number is too low");
+      // return "Your number is too high";
+    } //end of else if
+     else {
+      console.log("Your number is too high");
+      // return "Your number is too low";
+    }//end of else
   }//end of for
   
 }
 
-compareGuesses();
+
 
 app.listen(PORT, () => {
   console.log ('Server is running on port', PORT)

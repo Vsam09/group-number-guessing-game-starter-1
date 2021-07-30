@@ -3,16 +3,15 @@
 $(document).ready(handleReady);
 
 function handleReady() {
-  console.log("jquery is loaded!")
+  console.log("jquery is loaded!");
 
-$('#submitBtn').on("click", onSubmitBtn)
-
-getGuesses();
+  getGuesses();
+  $("#submitBtn").on("click", onSubmitBtn);
 }
-const numberGuesses = []
+const numberGuesses = [];
 
-function onSubmitBtn () {
-  console.log("on OnSubmitBtm")
+function onSubmitBtn() {
+  console.log("on OnSubmitBtm");
 
   let guessesObj = {
     inputOne: $("#inputOne").val(),
@@ -20,55 +19,48 @@ function onSubmitBtn () {
     inputThree: $("#inputThree").val(),
     inputFour: $("#inputFour").val(),
   };
-console.log(guessesObj)
+  console.log(guessesObj);
 
-numberGuesses.push(guessesObj)
-console.log(guessesObj);
+  numberGuesses.push(guessesObj);
+  console.log(guessesObj);
 
   $.ajax({
     url: "/guesses",
-    method:"POST", 
-    data: guessesObj
-  }).then((response)=> {
-    console.log('POST /guesses', response);
-   // getGuesses()
-  }).catch((error) => {
-    console.log('POST /guesses failed', error);
-    alert("Failed to save your input! check your data, before you wreck your data");
+    method: "POST",
+    data: guessesObj,
   })
-
+    .then((response) => {
+      console.log("POST /guesses", response);
+      getGuesses();
+    })
+    .catch((error) => {
+      console.log("POST /guesses failed", error);
+      alert(
+        "Failed to save your input! check your data, before you wreck your data"
+      );
+    });
 }
 
-
-
-function getGuesses () {
-
+function getGuesses() {
   $.ajax({
     url: "/guesses",
-    method:"GET"
+    method: "GET",
   }).then((response) => {
-
     console.log("Response is", response);
 
-  let el = $("#randomNumberOut");
+    let el = $("#randomNumberOut");
 
-  el.empty();
+    el.empty();
 
-    for(let i = 0; i < response.length; i++) {
+    for (let i = 0; i < response.length; i++) {
+      let random = response[i];
 
-      let random = response[i]
-      
       el.append(
         `<li> Sam: ${random.inputOne}</li>
         <li>Jay: ${random.inputTwo}</li>
         <li>Jeremy: ${random.inputThree}</li>
         <li>Hamza: ${random.inputFour}</li>`
       );
-
     }
-
-  })
+  });
 }
-
-
-
